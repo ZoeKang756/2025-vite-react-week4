@@ -1,0 +1,49 @@
+html,
+body {
+  height: 100%;
+  text-align: center;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+img {
+  object-fit: contain;
+  max-width: 100%;
+}
+
+.primary-image {
+  height: 400px;
+  width:500px;
+}
+
+.images {
+  height: 100px;
+  width:100px;
+  margin: 5px;
+}
+
+.images-thumbnails {
+  height: 160px;
+  width:160px;
+  margin: 5px;
+  overflow: hidden;
+  background-color: #EEE;
+}
+
+.images-thumbnail img{
+  object-fit:cover;
+  object-position: center;
+}
