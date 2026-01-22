@@ -99,7 +99,7 @@ function ProductModal({
       if (response.data.success) {
         updateCompleted([`產品${modalType === "edit" ? "更新" : "新增"}成功`]);
       } else {
-        updateFailure(response.data.message);
+        updateFailure([...response.data.message]);
       }
     } catch (error) {
       console.error("更新失敗：", error.response?.data);

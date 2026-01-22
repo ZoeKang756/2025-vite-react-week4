@@ -19,7 +19,7 @@ function DeleteConfirmModal({
       if (response.data.success) {
         deleteCompleted(["產品刪除成功"]);
       } else {
-        deleteFailure(response.data.message);
+        deleteFailure([...response.data.message]);
       }
     } catch (error) {
       deleteFailure(["產品刪除失敗"]);
