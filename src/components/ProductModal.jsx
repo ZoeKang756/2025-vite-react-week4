@@ -327,7 +327,7 @@ function ProductModal({
                     <div className="col-6">
                       <div className="row">
                         <div className="col-sm-4">
-                          <label htmlFor="unit" className="form-label">
+                          <label htmlFor="leadTime" className="form-label">
                             商品交期
                           </label>
                         </div>
