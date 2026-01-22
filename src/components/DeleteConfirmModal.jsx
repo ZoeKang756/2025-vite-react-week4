@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import axios from "axios";
 import GetAuthToken from "../untils/GetAuthToken";
 const { VITE_BASE_URL, VITE_API_PATH } = import.meta.env;
@@ -7,6 +8,8 @@ function DeleteConfirmModal({
   deleteCompleted,
   deleteFailure,
 }) {
+  const [tempData, setTempData] = useState(delConfirmData);
+
   const deleteProduct = async (id) => {
     const url = `${VITE_BASE_URL}/api/${VITE_API_PATH}/admin/product/${id}`;
     const token = GetAuthToken();
@@ -25,6 +28,10 @@ function DeleteConfirmModal({
       deleteFailure(["產品刪除失敗"]);
     }
   };
+
+  useEffect(() => {
+    setTempData(delConfirmData);
+  }, [delConfirmData]);
 
   return (
     <div
@@ -51,7 +58,7 @@ function DeleteConfirmModal({
           <div className="modal-body">
             <p className="fs-5 py-3">
               您確定要刪除
-              <span className="text-danger">{delConfirmData.title}</span>嗎？
+              <span className="text-danger"> {tempData.title} </span>嗎？
             </p>
           </div>
           <div className="modal-footer">
@@ -65,7 +72,7 @@ function DeleteConfirmModal({
             <button
               type="button"
               className="btn btn-danger"
-              onClick={() => deleteProduct(delConfirmData.id)}
+              onClick={() => deleteProduct(tempData.id)}
             >
               刪除
             </button>

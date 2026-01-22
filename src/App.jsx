@@ -36,7 +36,7 @@ function App() {
   const [tempProductData, setTempProductData] = useState(PRODUCT_DATA);
   const [delConfirmData, setDelConfirmData] = useState({
     id: "",
-    confrmMsg: "",
+    title: "",
   });
   const [modalType, setModalType] = useState("");
 
@@ -163,7 +163,7 @@ function App() {
   const openDelProductModal = (product) => {
     setDelConfirmData({
       id: product.id,
-      confrmMsg: product.title,
+      title: product.title,
     });
 
     delProductModalRef.current.show();
