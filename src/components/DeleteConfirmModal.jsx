@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import GetAuthToken from "../untils/GetAuthToken";
 const { VITE_BASE_URL, VITE_API_PATH } = import.meta.env;
@@ -9,10 +9,12 @@ function DeleteConfirmModal({
   deleteFailure,
 }) {
   const [tempData, setTempData] = useState(delConfirmData);
+  const [isSubmit, setIsSubmit] = useState(null);
 
-  const deleteProduct = async (id) => {
+  const deleteProduct = async (e, id) => {
     const url = `${VITE_BASE_URL}/api/${VITE_API_PATH}/admin/product/${id}`;
     const token = GetAuthToken();
+    setIsSubmit(true);
 
     try {
       const response = await axios.delete(url, {
@@ -22,10 +24,15 @@ function DeleteConfirmModal({
       if (response.data.success) {
         deleteCompleted(["產品刪除成功"]);
       } else {
-        deleteFailure([...response.data.message]);
+        const errMsg = Array.isArray(response.data.message)
+          ? [...response.data.message]
+          : [response.data.message];
+        deleteFailure(errMsg);
       }
     } catch (error) {
       deleteFailure(["產品刪除失敗"]);
+    } finally {
+      setIsSubmit(false);
     }
   };
 
@@ -71,6 +78,7 @@ function DeleteConfirmModal({
             </button>
             <button
               type="button"
+              disabled={isSubmit}
               className="btn btn-danger"
               onClick={() => deleteProduct(tempData.id)}
             >

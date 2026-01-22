@@ -15,6 +15,8 @@ function ProductModal({
   const [tempData, setTempData] = useState(tempProductData);
   const [uploadFile, setUploadFile] = useState(null);
   const uploadFileRef = useRef(null);
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [isUpload, setIsUpload] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -72,6 +74,7 @@ function ProductModal({
   };
 
   const updateProduct = async (id) => {
+    setIsSubmit(true);
     let url = `${VITE_BASE_URL}/api/${VITE_API_PATH}/admin/product`;
     let method = "post";
 
@@ -99,10 +102,15 @@ function ProductModal({
       if (response.data.success) {
         updateCompleted([`產品${modalType === "edit" ? "更新" : "新增"}成功`]);
       } else {
-        updateFailure([...response.data.message]);
+        const errMsg = Array.isArray(response.data.message)
+          ? [...response.data.message]
+          : [response.data.message];
+        updateFailure(errMsg);
       }
     } catch (error) {
       console.error("更新失敗：", error.response?.data);
+    } finally {
+      setIsSubmit(false);
     }
   };
 
@@ -114,7 +122,7 @@ function ProductModal({
 
   const uploadImage = async () => {
     if (!uploadFile) return;
-
+    setIsUpload(true);
     try {
       const formData = new FormData();
       formData.append("file-to-upload", uploadFile); // file-to-upload 為欄位名稱
@@ -126,21 +134,27 @@ function ProductModal({
           headers: { Authorization: token },
         },
       );
-
-      if (response.data.success) {          
+      if (response.data.success) {
         handleAddImage(response.data.imageUrl);
-        uploadFileRef.current.value =[]
+        uploadFileRef.current.value = [];
+        setUploadFile("");
+      } else {
+        const errMsg =
+          typeof response.data.message === "string"
+            ? response.data.message
+            : response.data.message.message;
+        updateFailure([errMsg]);
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsUpload(false);
     }
-
-    // 使用 fetch 或 axios 上傳 formData
   };
 
   useEffect(() => {
     setTempData(tempProductData);
-  }, [tempProductData,]);
+  }, [tempProductData]);
 
   return (
     <div
@@ -389,7 +403,8 @@ function ProductModal({
                       </div>
                       <div className="col-sm-8">
                         <input
-                          type="file" ref={uploadFileRef}
+                          type="file"
+                          ref={uploadFileRef}
                           className="form-control"
                           id="fileUpload"
                           name="fileUpload"
@@ -401,6 +416,7 @@ function ProductModal({
                       </div>
                       <div className="col-sm-2">
                         <button
+                          disabled={isUpload}
                           className="btn btn-outline-success btn-sm d-block w-100"
                           onClick={() => uploadImage()}
                         >
@@ -450,6 +466,7 @@ function ProductModal({
                           </div>
                           <div className="flex-grow-1 m-1">
                             <button
+                              disabled={isSubmit}
                               className="btn btn-outline-danger btn-sm w-100"
                               onClick={() => handleRemoveImage(pic)}
                             >
