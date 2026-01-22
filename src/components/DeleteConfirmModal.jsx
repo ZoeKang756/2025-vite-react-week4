@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import GetAuthToken from "../untils/GetAuthToken";
 const { VITE_BASE_URL, VITE_API_PATH } = import.meta.env;
