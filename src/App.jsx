@@ -24,6 +24,7 @@ const PRODUCT_DATA = {
   is_enabled: 1,
   imageUrl: "",
   imagesUrl: [],
+  leadTime: "",
 };
 
 function App() {

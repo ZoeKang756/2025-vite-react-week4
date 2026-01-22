@@ -324,45 +324,71 @@ function ProductModal({
                 </div>
                 <div className="mb-3">
                   <div className="row">
-                    <div className="col-sm-2">
-                      <label className="form-check-label" htmlFor="is_enabled">
-                        是否啟用
-                      </label>
-                    </div>
-                    <div className="col-sm-10 d-flex">
-                      <div className="form-check form-check-inline">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="is_enabled"
-                          id="is_enabled_1"
-                          value="1"
-                          onChange={(e) => handleInputChange(e)}
-                          checked={tempData.is_enabled * 1 === 1}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="is_enabled_1"
-                        >
-                          啟用
-                        </label>
+                    <div className="col-6">
+                      <div className="row">
+                        <div className="col-sm-4">
+                          <label htmlFor="unit" className="form-label">
+                            商品交期
+                          </label>
+                        </div>
+                        <div className="col-sm-8">
+                          <input
+                            name="leadTime"
+                            onChange={(e) => handleInputChange(e)}
+                            type="text"
+                            className="form-control"
+                            placeholder="請輸入天數"
+                            value={tempData.leadTime}
+                          />
+                        </div>
                       </div>
-                      <div className="form-check form-check-inline">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="is_enabled"
-                          id="is_enabled_0"
-                          value="0"
-                          onChange={(e) => handleInputChange(e)}
-                          checked={tempData.is_enabled * 1 !== 1}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="is_enabled_0"
-                        >
-                          不啟用
-                        </label>
+                    </div>
+                    <div className="col-6">
+                      <div className="row">
+                        <div className="col-sm-4">
+                          <label
+                            className="form-check-label"
+                            htmlFor="is_enabled"
+                          >
+                            是否啟用
+                          </label>
+                        </div>
+                        <div className="col-sm-8 d-flex">
+                          <div className="form-check form-check-inline">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="is_enabled"
+                              id="is_enabled_1"
+                              value="1"
+                              onChange={(e) => handleInputChange(e)}
+                              checked={tempData.is_enabled * 1 === 1}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="is_enabled_1"
+                            >
+                              啟用
+                            </label>
+                          </div>
+                          <div className="form-check form-check-inline">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="is_enabled"
+                              id="is_enabled_0"
+                              value="0"
+                              onChange={(e) => handleInputChange(e)}
+                              checked={tempData.is_enabled * 1 !== 1}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="is_enabled_0"
+                            >
+                              不啟用
+                            </label>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -51,30 +51,45 @@ function ViewProductModal({ tempProductData }) {
 
             <div>
               {tempData ? (
-                <div className="pb-1 pt-1 border-top">
-                  {primaryImage && (
-                    <img
-                      src={primaryImage}
-                      className="card-img-top primary-image"
-                      alt="主圖"
-                    />
-                  )}
+                <div>
+                  <div className="py-2 mt-2 bg-light rounded">
+                    {primaryImage && (
+                      <img
+                        src={primaryImage}
+                        className="card-img-top primary-image"
+                        alt="主圖"
+                      />
+                    )}
 
-                  <div className="d-flex flex-wrap justify-content-center">
-                    {tempData.imagesUrl.map((photo, index) => (
-                      <div className="m-1" key={`photo_${index}`}>
-                        <img
-                          onClick={() => setPrimaryImage(photo)}
-                          src={photo}
-                          className="card-img-top images rounded border p-1"
-                          alt="其他圖片"
-                        />{" "}
-                      </div>
-                    ))}
+                    <div className="d-flex flex-wrap justify-content-center">
+                      {tempData.imagesUrl.map((photo, index) => (
+                        <div className="m-1" key={`photo_${index}`}>
+                          <img
+                            onClick={() => setPrimaryImage(photo)}
+                            src={photo}
+                            className="card-img-top images rounded border p-1"
+                            alt="其他圖片"
+                          />{" "}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <div className="text-start m-3">
-                    <p>商品描述：{tempData.description}</p>
-                    <p>商品內容：{tempData.content}</p>
+                    {tempData.description ? (
+                      <p>商品描述：{tempData.description}</p>
+                    ) : (
+                      ""
+                    )}
+                    {tempData.content ? (
+                      <p>商品內容：{tempData.content}</p>
+                    ) : (
+                      ""
+                    )}
+                    {tempData.leadTime ? (
+                      <p>商品交期：{tempData.leadTime}天</p>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               ) : (
