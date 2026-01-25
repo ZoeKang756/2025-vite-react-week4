@@ -11,7 +11,7 @@ function DeleteConfirmModal({
   const [tempData, setTempData] = useState(delConfirmData);
   const [isSubmit, setIsSubmit] = useState(null);
 
-  const deleteProduct = async (e, id) => {
+  const deleteProduct = async (id) => {
     const url = `${VITE_BASE_URL}/api/${VITE_API_PATH}/admin/product/${id}`;
     const token = GetAuthToken();
     setIsSubmit(true);
